@@ -50,12 +50,19 @@ sudo wifite --interface-primary wlan0 --interface-secondary wlan1
 Supported Operating Systems
 ---------------------------
 
-### Fully Supported ✅
+### Desktop/Server
 * **[Kali Linux](https://www.kali.org/)** - Primary development platform (latest version recommended)
 * **[ParrotSec](https://www.parrotsec.org/)** - Well-tested and supported
 * **[BlackArch](https://blackarch.org/)** - Compatible with latest tool versions
 
-### Mobile Support 📱
+### Mobile & Android
+* **Wifite2 Mobile Bridge (Flutter)** - Native Android app for remote WiFi auditing
+  * Located in `frontend/` directory
+  * Built with Flutter for cross-platform support
+  * Real-time WebSocket connection to backend
+  * Supports all major attack methods through mobile interface
+  * See [Mobile Bridge Setup](#wifite2-mobile-bridge) for details
+
 * **Kali NetHunter (Android)** - Requires custom kernel with monitor mode support
   * Tested on Android 10 and newer
   * Requires compatible wireless adapter and proper drivers
@@ -206,6 +213,133 @@ This command provides a comprehensive report including:
 * **Wireless Interfaces:** Detection of adapters and their capabilities (Monitor mode, Injection).
 * **Attack Readiness:** A summary of which attacks (WPS, WPA3, PMKID, etc.) are possible with your current setup.
 * **Tip:** If you see "Conflicting processes found", it is highly recommended to run `airmon-ng check kill` or use the `--kill` flag when starting Wifite to ensure reliable performance.
+
+
+Wifite2 Mobile Bridge
+---------------------
+
+### Overview
+
+The Wifite2 Mobile Bridge is a Flutter-based Android application that provides a native interface for WiFi auditing. It connects to the Wifite2 backend via WebSocket to enable remote attack execution and real-time monitoring from your mobile device.
+
+### Features
+
+* **Real-time Backend Connection** - WebSocket connection to Wifite2 backend
+* **Attack Control** - Start, stop, and monitor WiFi attacks from your Android device
+* **Live Feed Display** - Real-time log terminal showing attack progress
+* **Status Monitoring** - Connection status and attack state visibility
+* **Liquid Glass UI** - Modern glassmorphic design with smooth animations
+* **Braille Activity Indicators** - Unique animated status indicators for different attack states
+
+### Mobile Build Setup
+
+#### Prerequisites
+
+* **Flutter 3.24.0+** - [Install Flutter](https://flutter.dev/docs/get-started/install)
+* **Android SDK 35+** - Included with Android Studio or installed separately
+* **Java 21+** - Required for Gradle compatibility
+* **Gradle 8.13+** - Automatically managed by Flutter
+
+#### Quick Build
+
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+flutter pub get
+
+# Build release APK
+flutter build apk --release
+
+# APK output: build/app/outputs/flutter-apk/app-release.apk
+```
+
+#### Development Build
+
+```bash
+cd frontend
+
+# Run in debug mode (requires connected Android device or emulator)
+flutter run
+
+# Enable verbose logging for debugging
+flutter run -v
+```
+
+#### Troubleshooting Mobile Build
+
+**Flutter not found:**
+```bash
+# Add Flutter to PATH (Linux/Mac)
+export PATH="$PATH:$HOME/flutter/bin"
+
+# Verify installation
+flutter doctor
+```
+
+**Android SDK issues:**
+```bash
+# Configure Flutter with Android SDK path
+flutter config --android-sdk /path/to/android-sdk
+
+# Run diagnostic check
+flutter doctor -v
+```
+
+**Build failures:**
+```bash
+# Clean and rebuild
+flutter clean
+flutter pub get
+flutter build apk --release
+
+# Check for Gradle cache issues
+rm -rf ~/.gradle/caches
+flutter build apk --release
+```
+
+### Mobile Architecture
+
+```
+frontend/
+├── lib/
+│   ├── main.dart                 # Application entry point
+│   ├── services/
+│   │   ├── websocket_service.dart   # WebSocket backend connection
+│   │   └── database_service.dart    # Local SQLite database
+│   └── ui/
+│       ├── screens/
+│       │   └── dashboard_screen.dart # Main dashboard UI
+│       └── widgets/
+│           ├── liquid_glass_card.dart # Glassmorphic UI component
+│           └── braille_activity.dart  # Activity indicator widget
+├── pubspec.yaml                 # Flutter dependencies
+└── android/                     # Android-specific configuration
+```
+
+### Connecting to Backend
+
+Configure the WebSocket connection in `lib/services/websocket_service.dart`:
+
+```dart
+// Connect to backend (default: localhost:8000)
+context.read<WebSocketService>().connect('ws://YOUR_BACKEND_IP:8000/ws');
+```
+
+### APK Distribution
+
+The built APK is ready for distribution:
+
+```bash
+# Location
+build/app/outputs/flutter-apk/app-release.apk
+
+# Size: ~19.6 MB
+
+# Install on device
+adb install build/app/outputs/flutter-apk/app-release.apk
+```
 
 
 Features
