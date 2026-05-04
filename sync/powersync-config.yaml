@@ -1,0 +1,48 @@
+version: 1
+
+database:
+  file: ./tool.db  # Local SQLite database
+
+sync:
+  backend_url: ${POWERSYNC_BACKEND_URL:-http://localhost:8000/powersync}  # Adjust for deployment
+  auth_token: ${POWERSYNC_AUTH_TOKEN}  # Set via environment variable
+  tables:
+    - networks
+    - handshakes
+    - scan_sessions
+    - attack_attempts
+    - device_capabilities
+  interval: 5  # seconds
+  sync_on_start: true
+  conflict_resolution: latest_wins
+
+table_configs:
+  networks:
+    query: "SELECT * FROM networks"
+    direction: bidirectional
+  handshakes:
+    query: "SELECT * FROM handshakes"
+    direction: bidirectional
+  scan_sessions:
+    query: "SELECT * FROM scan_sessions"
+    direction: bidirectional
+  attack_attempts:
+    query: "SELECT * FROM attack_attempts"
+    direction: bidirectional
+  device_capabilities:
+    query: "SELECT * FROM device_capabilities"
+    direction: bidirectional
+
+# Performance and logging
+logging:
+  level: info
+  # Enable query logging for debugging
+  # query_logging: true
+
+# Migrations (if needed in the future)
+# migrations:
+#   - version: 1
+#     up: |
+#       ALTER TABLE networks ADD COLUMN new_column TEXT DEFAULT '';
+#     down: |
+#       ALTER TABLE networks DROP COLUMN new_column;
