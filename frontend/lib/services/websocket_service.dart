@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-const String cloudUrl = "wss://special-space-palm-tree-x5669qjw764626r57-40047.app.github.dev/ws";
+const String cloudUrl = "wss://special-space-palm-tree-x5669qjw764626r57-8000.app.github.dev/ws";
 
 class WebSocketService extends ChangeNotifier {
   WebSocketChannel? _channel;
