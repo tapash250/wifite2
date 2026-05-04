@@ -3,13 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+const String cloudUrl = "wss://special-space-palm-tree-x5669qjw764626r57-40047.app.github.dev/ws";
+
 class WebSocketService extends ChangeNotifier {
   WebSocketChannel? _channel;
   final List<String> logs = [];
   bool isScanning = false;
   String currentStatus = "Disconnected";
 
-  void connect(String url) {
+  void connect([String url = cloudUrl]) {
     try {
       _channel = WebSocketChannel.connect(Uri.parse(url));
       currentStatus = "Connected";
