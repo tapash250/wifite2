@@ -32,7 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Positioned(
             top: -100,
             right: -100,
-            child: Container(width: 300, height: 300, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue.withOpacity(0.15), blurRadius: 100)),
+            child: Container(width: 300, height: 300, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue.withOpacity(0.15), boxShadow: [BoxShadow(blurRadius: 100)])),
           ),
           SafeArea(
             child: Padding(
@@ -81,7 +81,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               const Text("LIVE FEED", style: TextStyle(fontSize: 12, color: Colors.grey)),
               const Spacer(),
-              if (ws.isScanning) const BrailleActivity(state: 'searching'),
+              if (ws.isScanning) const BrailleActivity(type: 'searching'),
             ],
           ),
           const Divider(color: Colors.white10),

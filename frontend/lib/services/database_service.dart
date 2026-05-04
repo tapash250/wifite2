@@ -71,7 +71,7 @@ class DatabaseService {
 
   /// Query method with proper error handling.
   Future<List<Map<String, dynamic>>> query(String table,
-      {Map<String, Object?>? where,
+      {String? where,
       List<Object?>? whereArgs,
       String? groupBy,
       String? having,
@@ -135,7 +135,7 @@ class DatabaseService {
   Future<void> rawExecute(String sql,
       [List<Object?>? arguments]) async {
     final db = await database;
-    await db.rawExecute(sql, arguments);
+    await db.execute(sql, arguments);
   }
 
   /// Run a batch operation.

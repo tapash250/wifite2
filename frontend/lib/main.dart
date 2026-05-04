@@ -1,17 +1,36 @@
-I see that some files are missing from the frontend. We have:
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'services/websocket_service.dart';
+import 'services/database_service.dart';
+import 'ui/screens/dashboard_screen.dart';
 
-Existing files:
-- BUILD_STATUS.md
-- pubspec.yaml
-- lib/services/database_service.dart
-- lib/ui/widgets/braille_activity.dart
-- lib/ui/widgets/liquid_glass_card.dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseService.instance.init();
+  runApp(const MyApp());
+}
 
-Missing files (as referenced in the code):
-- lib/main.dart
-- lib/services/websocket_service.dart
-- lib/ui/screens/dashboard_screen.dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-We need to create these missing files.
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<DatabaseService>(create: (_) => DatabaseService.instance),
+        Provider<WebSocketService>(create: (_) => WebSocketService()),
+      ],
+      child: MaterialApp(
+        title: 'Wifite2 Mobile',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        ),
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        themeMode: ThemeMode.dark,
+        home: const DashboardScreen(),
+      ),
+    );
+  }
+}
 
-Let me create them now.

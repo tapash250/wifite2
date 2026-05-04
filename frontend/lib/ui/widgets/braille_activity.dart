@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class BrailleActivity extends StatefulWidget {
   final String type; // 'searching', 'cracking', 'idle'
