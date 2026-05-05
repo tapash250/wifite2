@@ -51,7 +51,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///home/codespace/flutter/packages/flutter",
+      "rootUri": "file:///opt/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -63,7 +63,7 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///home/codespace/flutter/packages/flutter_test",
+      "rootUri": "file:///opt/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -177,7 +177,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///home/codespace/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///opt/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -249,7 +249,7 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///home/codespace/.pub-cache/hosted/pub.dev/vm_service-14.2.4",
+      "rootUri": "file:///home/codespace/.pub-cache/hosted/pub.dev/vm_service-14.2.5",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -278,10 +278,10 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2026-05-04T19:01:00.985723Z",
+  "generated": "2026-05-05T02:58:17.870476Z",
   "generator": "pub",
-  "generatorVersion": "3.5.0",
-  "flutterRoot": "file:///home/codespace/flutter",
-  "flutterVersion": "3.24.0",
+  "generatorVersion": "3.5.3",
+  "flutterRoot": "file:///opt/flutter",
+  "flutterVersion": "3.24.3",
   "pubCache": "file:///home/codespace/.pub-cache"
 }
